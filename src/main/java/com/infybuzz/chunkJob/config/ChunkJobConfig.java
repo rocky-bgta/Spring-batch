@@ -11,11 +11,13 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 public class ChunkJobConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
@@ -54,5 +56,33 @@ public class ChunkJobConfig {
                 .writer(integerItemWriter)
                 .build();
     }
+
+    //============================== chunk and tasklet combination ============================================
+
+    @Bean
+    public Job chunkAndTaskletJob(){
+        return jobBuilderFactory.get("Get Chunk and Tasklet job")
+                .incrementer(new RunIdIncrementer())
+                .start(chunkStep())
+                .next(taskletStep())
+                .build();
+    }
+
+    private Step taskletStep() {
+        return stepBuilderFactory.get("Tasklet Step")
+                .tasklet(taskletWork())
+                .build();
+    }
+
+    private Tasklet taskletWork() {
+        Tasklet tasklet;
+        tasklet = (stepContribution, chunkContext) -> {
+            System.out.println("This is tasklet step");
+            System.out.println("Step Execution context: "+ chunkContext.getStepContext().getStepExecutionContext());
+            return RepeatStatus.FINISHED;
+        };
+        return tasklet;
+    }
+    //================================ chunk and tasklet combination =====================================
 
 }
