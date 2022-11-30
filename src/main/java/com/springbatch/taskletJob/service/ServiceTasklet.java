@@ -1,4 +1,4 @@
-package com.infybuzz.taskletJob.service;
+package com.springbatch.taskletJob.service;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;

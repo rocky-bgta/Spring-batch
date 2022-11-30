@@ -1,4 +1,4 @@
-package com.infybuzz.chunkJob.reader;
+package com.springbatch.chunkJob.reader;
 
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.NonTransientResourceException;

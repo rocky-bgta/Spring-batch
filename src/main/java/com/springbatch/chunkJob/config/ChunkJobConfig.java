@@ -1,8 +1,8 @@
-package com.infybuzz.chunkJob.config;
+package com.springbatch.chunkJob.config;
 
-import com.infybuzz.chunkJob.processor.IntegerItemProcessor;
-import com.infybuzz.chunkJob.reader.IntegerItemReader;
-import com.infybuzz.chunkJob.writer.IntegerItemWriter;
+import com.springbatch.chunkJob.processor.IntegerItemProcessor;
+import com.springbatch.chunkJob.reader.IntegerItemReader;
+import com.springbatch.chunkJob.writer.IntegerItemWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;

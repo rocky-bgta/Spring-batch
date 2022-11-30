@@ -1,8 +1,8 @@
-package com.infybuzz.taskletJob.config;
+package com.springbatch.taskletJob.config;
 
-import com.infybuzz.taskletJob.listener.JobListener;
-import com.infybuzz.taskletJob.listener.StepListener;
-import com.infybuzz.taskletJob.service.ServiceTasklet;
+import com.springbatch.taskletJob.listener.JobListener;
+import com.springbatch.taskletJob.listener.StepListener;
+import com.springbatch.taskletJob.service.ServiceTasklet;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;

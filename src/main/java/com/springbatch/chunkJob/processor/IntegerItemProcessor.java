@@ -1,4 +1,4 @@
-package com.infybuzz.chunkJob.processor;
+package com.springbatch.chunkJob.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.infybuzz.chunkJob.writer;
+package com.springbatch.chunkJob.writer;
 
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.infybuzz.app;
+package com.springbatch.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
