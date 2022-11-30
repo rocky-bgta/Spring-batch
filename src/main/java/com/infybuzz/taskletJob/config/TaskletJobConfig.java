@@ -1,8 +1,8 @@
-package com.infybuzz.config;
+package com.infybuzz.taskletJob.config;
 
-import com.infybuzz.listener.JobListener;
-import com.infybuzz.listener.StepListener;
-import com.infybuzz.service.ServiceTasklet;
+import com.infybuzz.taskletJob.listener.JobListener;
+import com.infybuzz.taskletJob.listener.StepListener;
+import com.infybuzz.taskletJob.service.ServiceTasklet;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JobConfig {
+public class TaskletJobConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
 
@@ -30,13 +30,13 @@ public class JobConfig {
     @Autowired
     private StepListener stepListener;
 
-    public JobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
+    public TaskletJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
     }
 
     @Bean
-    public Job job() {
+    public Job taskletJob() {
         return jobBuilderFactory.get("First Job")
                 .incrementer(new RunIdIncrementer())
                 .start(firstStep())
