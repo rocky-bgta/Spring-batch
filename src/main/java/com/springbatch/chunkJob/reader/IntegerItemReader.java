@@ -19,6 +19,7 @@ public class IntegerItemReader implements ItemReader<Integer> {
         System.out.println("Inside Item Reader");
         Integer item;
         if(i<list.size()){
+            //Thread.sleep(3000); to check job stop rest api working
             item = list.get(i);
             i++;
             return item;
