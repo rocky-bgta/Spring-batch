@@ -15,9 +15,8 @@ public class CsvFileItemReader {
 
     public FlatFileItemReader<StudentCsv> flatFileItemReader() {
         FlatFileItemReader<StudentCsv> flatFileItemReader = new FlatFileItemReader<>();
-        flatFileItemReader.setResource(new FileSystemResource(
-                new File("C:\\GitRepo\\Spring-batch\\inputFiles\\students.csv")
-        ));
+        File file = new File("C:\\GitRepo\\Spring-batch\\inputFiles\\students.csv");
+        flatFileItemReader.setResource(new FileSystemResource(file));
 //
 //        flatFileItemReader.setLineMapper(new DefaultLineMapper<StudentCsv>() {
 //            {
