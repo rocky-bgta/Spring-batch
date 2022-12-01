@@ -24,6 +24,7 @@ public class CsvFileItemReader {
                 setLineTokenizer(new DelimitedLineTokenizer() {
                     {
                         setNames("ID", "First Name", "Last Name", "Email");
+                        setDelimiter(",");
                     }
                 });
 
