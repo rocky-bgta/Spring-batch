@@ -3,6 +3,7 @@ package com.springbatch.chunkJob.reader;
 import com.springbatch.chunkJob.model.StudentJdbc;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import javax.sql.DataSource;
 @Component
 public class JdbcItemReader {
 
+    @Qualifier("cashedev")
     @Autowired
     private DataSource dataSource;
 
