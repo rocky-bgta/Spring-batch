@@ -1,11 +1,14 @@
 package com.springbatch.chunkJob.config;
 
 import com.springbatch.chunkJob.model.StudentCsv;
+import com.springbatch.chunkJob.model.StudentJdbc;
 import com.springbatch.chunkJob.processor.IntegerItemProcessor;
 import com.springbatch.chunkJob.reader.CsvFileItemReader;
 import com.springbatch.chunkJob.reader.IntegerItemReader;
+import com.springbatch.chunkJob.reader.JdbcItemReader;
 import com.springbatch.chunkJob.writer.CsvFileItemWriter;
 import com.springbatch.chunkJob.writer.IntegerItemWriter;
+import com.springbatch.chunkJob.writer.JdbcItemWriter;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -42,6 +45,14 @@ public class ChunkJobConfig {
     @Autowired
     private CsvFileItemWriter csvFileItemWriter;
     //================ csv  =======================
+
+
+    //================ JDBC =======================
+    @Autowired
+    private JdbcItemReader jdbcItemReader;
+    @Autowired
+    private JdbcItemWriter jdbcItemWriter;
+    //================ JDBC =======================
 
 
     public ChunkJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
@@ -95,9 +106,6 @@ public class ChunkJobConfig {
     //================================ chunk and tasklet combination end =====================================
 
 
-
-
-
     //=============================== CSV file Processing start ================================================
 
     @Bean
@@ -118,4 +126,22 @@ public class ChunkJobConfig {
     }
 
     //=============================== CSV file Processing end ================================================
+
+    //=============================== JDBC Processing start ==================================================
+    @Bean
+    public Job chunkJobForJdbc() {
+        return jobBuilderFactory.get("Chunk Job for JDBC")
+                .incrementer(new RunIdIncrementer())
+                .start(chunkStepForJdbc())
+                .build();
+    }
+
+    private Step chunkStepForJdbc() {
+        return stepBuilderFactory.get("First Chunk Step")
+                .<StudentJdbc, StudentJdbc>chunk(3)
+                .reader(jdbcItemReader.jdbcJdbcCursorItemReader())
+                .writer(jdbcItemWriter)
+                .build();
+    }
+    //=============================== JDBC Processing end ==================================================
 }
