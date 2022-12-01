@@ -29,6 +29,10 @@ public class JobLauncherService {
     @Autowired
     Job chunkJob;
 
+    @Qualifier("chunkJobForCsvFile")
+    @Autowired
+    Job chunkJobForCsvFile;
+
     @Async
     public void startJob(String jobName, List<JobParamsRequest> jobParamsRequestList){
         Map<String, JobParameter> params = new HashMap<>();
@@ -45,6 +49,8 @@ public class JobLauncherService {
                jobExecution =  jobLauncher.run(taskletJob, jobParameters);
             } else if(jobName.equals("chunk")) {
                 jobExecution = jobLauncher.run(chunkJob, jobParameters);
+            }else if(jobName.equals("chunkJobForCsvFile")){
+                jobExecution = jobLauncher.run(chunkJobForCsvFile, jobParameters);
             }
             System.out.println("JobExecution ID = " + jobExecution.getId());
         }catch (Exception ex){
